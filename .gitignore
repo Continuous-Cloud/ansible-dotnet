@@ -1,0 +1,10 @@
+__pycache__
+
+# collection aritfacts
+*.tar.gz
+
+# ansible lint
+.cache
+
+# molecule
+roles/*/molecule/*/terraform

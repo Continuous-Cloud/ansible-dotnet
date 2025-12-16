@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  role_name: dotnet_core
+  author: Continuous Cloud
+  description: >-
+    This role installs .Net Core on the remote Windows host. You can specify SDK or runtime,
+    and the versions you want.
+  company: Continuous Cloud
+
+  license: GPL-3.0-or-later
+
+  min_ansible_version: '2.17'
+
+  platforms:
+    - name: Windows
+      versions:
+        - "2022"
+        - "2019"
+
+  galaxy_tags: []
+
+dependencies: []

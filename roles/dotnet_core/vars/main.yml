@@ -1,0 +1,28 @@
+---
+## https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-centos7
+## https://dotnet.microsoft.com/en-us/download/dotnet
+
+dotnet_core_vars:
+  install_args: /install /passive /norestart
+  download_location: 'C:\dotnet_core.exe'
+  return_codes: [0, 666, 3010, 3221225477]
+  product_id: dotnet_core
+  runtime:
+    rpm_package_name: aspnetcore-runtime
+    expected_components:
+      - Microsoft.AspNetCore.App
+      - Microsoft.NETCore.App
+    '8.0':
+      full_version: '8.0.8'
+      url: "https://download.visualstudio.microsoft.com/download/pr/\
+            ef1366bd-3111-468b-93da-17e6ccb057e1/1fac364775c1accb09b9ac5314179004/\
+            dotnet-hosting-8.0.8-win.exe"
+
+  sdk:
+    rpm_package_name: dotnet-sdk
+    expected_components: []
+    '8.0':
+      full_version: '8.0.401'
+      url: "https://download.visualstudio.microsoft.com/download/pr/\
+            f5f1c28d-7bc9-431e-98da-3e2c1bbd1228/864e152e374b5c9ca6d58ee953c5a6ed/\
+            dotnet-sdk-8.0.401-win-x64.exe"

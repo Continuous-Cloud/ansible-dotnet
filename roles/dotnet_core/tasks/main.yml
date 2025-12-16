@@ -1,0 +1,15 @@
+---
+- name: Check inputs
+  ansible.builtin.assert:
+    that:
+      - dotnet_core_vars[dotnet_core_type] is defined
+      - dotnet_core_vars[dotnet_core_type][dotnet_core_version] is defined
+    fail_msg: >-
+      The Dotnet Core type {{ netcore_type }} and version {{ netcore_version }} combination is not supported.
+
+- name: Store dotnet install vars
+  ansible.builtin.set_fact:
+    __dotnet_core_install_vars: "{{ dotnet_core_vars[dotnet_core_type][dotnet_core_version] }}"
+
+- name: Load Windows tasks
+  ansible.builtin.include_tasks: Windows/main.yml

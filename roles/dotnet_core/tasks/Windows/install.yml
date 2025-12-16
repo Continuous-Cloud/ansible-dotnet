@@ -1,0 +1,19 @@
+---
+- name: Get installer
+  ansible.builtin.win_get_url:
+    src: "{{ __dotnet_core_install_vars.url }}"
+    dest: "{{ dotnet_core_vars.download_location }}"
+
+- name: Install exe
+  ansible.windows.win_package:
+    path: "{{ dotnet_core_vars.download_location }}"
+    arguments: "{{ dotnet_core_vars.install_args }}"
+    product_id: "{{ dotnet_core_vars.product_id }}"
+
+- name: Check Install Health
+  ansible.builtin.include_tasks: check_install_health.yml
+
+- name: Remove Installer If Present
+  ansible.windows.win_file:
+    path: "{{ dotnet_core_vars.download_location }}"
+    state: absent

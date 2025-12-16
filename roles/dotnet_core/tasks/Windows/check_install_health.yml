@@ -1,0 +1,30 @@
+---
+- name: Lookup Dotnet Core Versions
+  continuouscloud.dotnet.win_dotnet_core_info:
+    type: "{{ dotnet_core_type }}"
+    version: "{{ dotnet_core_version | first }}"
+  register: _dotnet_info
+
+- name: Check Version is Installed
+  ansible.builtin.assert:
+    that:
+      - _latest_installed_version is defined
+      - _latest_installed_version is version(_expected_version, '>=')
+    fail_msg: Expected version {{ _expected_version }} or greater patch version. Found {{ _dotnet_info[dotnet_core_type].versions }}
+    quiet: True
+  vars:
+    _latest_installed_version: "{{ _dotnet_info[dotnet_core_type].versions[0] }}"
+    _expected_version: "{{ __dotnet_core_install_vars.full_version }}"
+
+- name: Check components are installed
+  ansible.builtin.assert:
+    that: not (_expected_components | difference(_latest_installed_components))
+    fail_msg: >-
+      {{ _expected_components }} were expected but only the following dotnet components were
+      found {{ _latest_installed_components }}
+    quiet: True
+  vars:
+    _latest_installed_version: "{{ _dotnet_info[dotnet_core_type].versions[0] }}"
+    _latest_installed_components: "{{ _dotnet_info[dotnet_core_type].components[_latest_installed_version] | default('[]') }}"
+    _expected_components: >-
+      {{ __dotnet_core_install_vars.expected_components | default(dotnet_core_vars[dotnet_core_type].expected_components) }}
