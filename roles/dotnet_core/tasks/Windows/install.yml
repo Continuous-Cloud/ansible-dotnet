@@ -1,7 +1,7 @@
 ---
 - name: Get installer
   ansible.builtin.win_get_url:
-    src: "{{ __dotnet_core_install_vars.url }}"
+    url: "{{ __dotnet_core_install_vars.url }}"
     dest: "{{ dotnet_core_vars.download_location }}"
 
 - name: Install exe
