@@ -5,7 +5,7 @@
       - dotnet_core_vars[dotnet_core_type] is defined
       - dotnet_core_vars[dotnet_core_type][dotnet_core_version] is defined
     fail_msg: >-
-      The Dotnet Core type {{ netcore_type }} and version {{ netcore_version }} combination is not supported.
+      The Dotnet Core type {{ dotnet_core_type }} and version {{ dotnet_core_version }} combination is not supported.
 
 - name: Store dotnet install vars
   ansible.builtin.set_fact:
