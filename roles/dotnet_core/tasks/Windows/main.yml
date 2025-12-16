@@ -1,6 +1,6 @@
 ---
 - name: Lookup installed versions
-  continuouscloud.dotnent.win_dotnet_core_info:
+  continuouscloud.dotnet.win_dotnet_core_info:
     type: "{{ dotnet_core_type }}"
     version: "{{ dotnet_core_version | first }}"
   register: _dotnet_info
