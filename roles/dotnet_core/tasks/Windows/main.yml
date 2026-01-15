@@ -10,7 +10,7 @@
   when: >-
     not _latest_installed_version or
     _latest_installed_version is version(_expected_version, '<') or
-    (_expected_components | difference(_latest_installed_components))
+    (_expected_components | difference(_latest_installed_components) | length > 0)
   vars:
     _latest_installed_version: "{{ _dotnet_info[dotnet_core_type].versions[0] | default('') }}"
     _latest_installed_components: "{{ _dotnet_info[dotnet_core_type].components[_latest_installed_version] | default([]) }}"
